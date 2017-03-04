@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GitHub Directory Card</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="global.css" rel="stylesheet" />   
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+<body>
+  <section id="page-container">
+    
+    <div id="app" class="container">
+        <div class="btnside">
+            <button type="button" class="btn btn-primary" id="addcard">Add Card </button>
+            <button type="button" class="btn btn-success" id="viewcard">View Cards </button>
+        </div>
+        <div class="container loader-image">
+              <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</button>
+        </div> 
+        <div class="alert alert-success" role="alert"> Congratulations! Card added successfully. Please click on View Cards button </div>
+        <div class="alert alert-warning" role="alert">Sorry! You dont have cards added to your Page. Please click Add Card button to add new card</div>
+        <div class="row"> 
+        </div>
+    </div>     
+   
+	<!-- Add Card Template -->
+    <script id="search-template" type="text/x-handlebars-template">
+      <div class="input-section">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1"> Enter GitHub Name to Search :  </span>
+           <input type="text" class="form-control" placeholder="github login" aria-describedby="basic-addon1" id="username"/>
+                </div> 
+         <button type="button" id="submit" class="btn btn-info">Search</button>  
+           
+      </div>          
+    </script>
+	<!--User Card Template -->
+    <script id="card-template" type="text/x-handlebars-template">       
+        <div class="card">          
+          <a href="<%= userData.html_url %>">
+            <img class="card-img-top" src='<%= userData.avatar_url %>' alt="<%= userData.name %>">
+          </a>    
+          <div class="card-block">
+              <h4 class="card-title"><%= userData.name %></%></h4>
+          </div>
+            <!-- list -->
+          <ul class="list-group list-group-flush" style="list-type:none">
+              <li class="list-group-item"><b>Location :</b> <%= userData.location %></%></li>
+              <li class="list-group-item"><b>Followers : </b><%= userData.followers %></%></li>
+             
+          </ul>
+
+          <div class="card-block">
+              <% if(isSingle) { %>
+                 <input type="text" hidden class="id" value="<%= userData.id %>"/> 
+                  <a href="#" class="btn btn-success add-card">
+                    Add Card To Page
+                  </a>
+              <% } else { %>
+                  <a href="#" class="btn btn-danger remove-card">
+                      <span class="id" style="display:none"> <%= userData.id %></%></span>
+                  x
+                  </a>
+              <% } %>
+        </%>
+        </%>
+        </%>
+          </div>
+        </div>
+    </script>
+
+	</section>
+  <!-- Loading JS Files -->
+  <script src="underscore-min.js"></script>
+  <script src="jquery.min.js"></script>
+  <script src="backbone-min.js"></script>
+  <script src="card-collection.js"></script>
+  <script src="user-model.js"></script>
+  <script src="add-card.js"></script>
+  <script src="card-list.js"></script>
+  <script src="card-lists.js"></script>
+  <script src="user-view.js"></script>
+  <script src="global.js"></script>  
+</body>
+</html>
